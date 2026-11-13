@@ -1,0 +1,28 @@
+<section id="contact" class="section" aria-labelledby="contact-heading">
+  <div class="container">
+    <h2 id="contact-heading">{{ intro.heading }}</h2>
+    <p class="lead">{{ intro.text }}</p>
+
+    <ul class="methods">
+      @for (method of methods; track method.kind) {
+        <li>
+          <a
+            class="method"
+            [href]="method.href"
+            [attr.target]="method.external ? '_blank' : null"
+            [attr.rel]="method.external ? 'noopener noreferrer' : null"
+          >
+            <app-contact-icon class="icon" [kind]="method.kind" [iconUrl]="method.iconUrl" />
+            <span class="text">
+              <span class="label">{{ method.label }}</span>
+              <span class="value">{{ method.value }}</span>
+            </span>
+            @if (method.external) {
+              <span class="visually-hidden">(opens in a new tab)</span>
+            }
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

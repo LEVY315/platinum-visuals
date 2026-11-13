@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+main {
+  scroll-margin-top: var(--header-height);
+
+  &:focus {
+    outline: none;
+  }
+}

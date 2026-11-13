@@ -1,0 +1,25 @@
+@let item = category();
+<button #button class="card" type="button" (click)="opened.emit(button)">
+  <span class="media">
+    <img
+      [src]="item.cover.thumb"
+      [alt]="item.cover.alt"
+      [width]="item.cover.width"
+      [height]="item.cover.height"
+      loading="lazy"
+      decoding="async"
+    />
+  </span>
+  <span class="body">
+    <span class="title">{{ item.title }}</span>
+    @if (item.description) {
+      <span class="description">{{ item.description }}</span>
+    }
+    <span class="cta">
+      View gallery
+      <span class="count"
+        >· {{ item.images.length }} {{ item.images.length === 1 ? 'photo' : 'photos' }}</span
+      >
+    </span>
+  </span>
+</button>

@@ -1,0 +1,220 @@
+@use 'breakpoints' as bp;
+
+.dialog {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-bg);
+  color: var(--color-charcoal);
+
+  &::backdrop {
+    background: rgb(20 26 30 / 80%);
+  }
+
+  @include bp.up(bp.$md) {
+    width: min(1200px, 100% - 3rem);
+    height: calc(100% - 3rem);
+    margin: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--gutter);
+  border-bottom: 1px solid var(--color-border);
+
+  h2 {
+    margin: 0;
+    font-size: var(--text-xl);
+  }
+
+  .count {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+}
+
+.icon-button svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.close {
+  flex-shrink: 0;
+  border-color: var(--color-border);
+  color: var(--color-charcoal);
+
+  &:hover {
+    background: var(--color-charcoal);
+    color: var(--color-on-dark);
+  }
+}
+
+// Scrolls vertically; the list inside keeps an auto height so CSS columns balance
+// instead of overflowing sideways.
+.grid-scroll {
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-4) var(--gutter);
+  overflow-y: auto;
+}
+
+.grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2 10rem;
+  column-gap: var(--space-3);
+
+  @include bp.up(bp.$md) {
+    columns: 3 14rem;
+    column-gap: var(--space-4);
+  }
+
+  li {
+    break-inside: avoid;
+    margin-bottom: var(--space-3);
+
+    @include bp.up(bp.$md) {
+      margin-bottom: var(--space-4);
+    }
+  }
+}
+
+.thumb {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-border);
+  overflow: hidden;
+  cursor: zoom-in;
+
+  img {
+    width: 100%;
+    transition: opacity var(--duration);
+  }
+
+  &:hover img {
+    opacity: 0.9;
+  }
+}
+
+.viewer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.viewer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--gutter);
+}
+
+.viewer-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 2.75rem;
+  padding: 0 var(--space-3) 0 var(--space-1);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-blue);
+  font-weight: 600;
+  cursor: pointer;
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+  }
+
+  &:hover {
+    color: var(--color-blue-dark);
+  }
+}
+
+.counter {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0 var(--gutter) var(--gutter);
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity var(--duration);
+
+    &.is-loaded {
+      opacity: 1;
+    }
+  }
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  max-width: none;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  border-color: transparent;
+  background: rgb(52 63 70 / 75%);
+  color: var(--color-on-dark);
+  transform: translateY(-50%);
+
+  &:hover {
+    background: var(--color-charcoal);
+  }
+}
+
+.nav-prev {
+  left: var(--space-2);
+}
+
+.nav-next {
+  right: var(--space-2);
+}

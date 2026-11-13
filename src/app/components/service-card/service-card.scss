@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-charcoal);
+  text-align: left;
+  cursor: pointer;
+
+  &:hover .cta {
+    color: var(--color-blue-dark);
+    text-decoration: underline;
+  }
+
+  &:hover img {
+    opacity: 0.92;
+  }
+}
+
+.media {
+  display: block;
+  aspect-ratio: 4 / 5;
+  background: var(--color-border);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity var(--duration);
+  }
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  line-height: 1.25;
+  color: var(--color-charcoal);
+}
+
+.description {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.cta {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-blue);
+}
+
+.count {
+  font-weight: 400;
+  color: var(--color-muted);
+}

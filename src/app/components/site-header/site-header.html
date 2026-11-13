@@ -1,0 +1,48 @@
+<header class="site-header" [class.is-scrolled]="scrolled()">
+  <div class="container bar">
+    <a class="brand" href="#top" (click)="closeMenu()">
+      <img
+        src="brand/logo-header.svg"
+        [alt]="site.logoAlt"
+        width="1080"
+        height="600"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </a>
+
+    <button
+      #toggle
+      class="menu-toggle"
+      type="button"
+      aria-controls="site-menu"
+      [attr.aria-expanded]="menuOpen()"
+      (click)="toggleMenu()"
+    >
+      <span class="visually-hidden">Menu</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        @if (menuOpen()) {
+          <path d="M6 6l12 12M18 6L6 18" />
+        } @else {
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        }
+      </svg>
+    </button>
+
+    <nav id="site-menu" class="menu" aria-label="Main" [class.is-open]="menuOpen()">
+      <ul>
+        @for (link of site.nav; track link.id) {
+          <li>
+            <a
+              [href]="'#' + link.id"
+              [class.is-active]="activeId() === link.id"
+              [attr.aria-current]="activeId() === link.id ? 'true' : null"
+              (click)="closeMenu()"
+              >{{ link.label }}</a
+            >
+          </li>
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

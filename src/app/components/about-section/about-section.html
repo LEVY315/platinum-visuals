@@ -1,0 +1,30 @@
+<section id="about" class="section" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="intro">
+      <img
+        class="logo"
+        src="brand/platinum-visuals-logo-transparent.svg"
+        [alt]="logoAlt"
+        width="1080"
+        height="1350"
+        decoding="async"
+      />
+      <div class="copy">
+        <p class="eyebrow">{{ about.eyebrow }}</p>
+        <h1 id="about-heading">{{ about.headline }}</h1>
+        @for (paragraph of about.paragraphs; track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="blocks">
+      @for (block of about.blocks; track block.title) {
+        <article class="block">
+          <h2>{{ block.title }}</h2>
+          <p>{{ block.text }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>

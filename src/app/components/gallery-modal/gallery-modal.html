@@ -1,0 +1,109 @@
+<dialog
+  #dialog
+  class="dialog"
+  aria-labelledby="gallery-title"
+  (cancel)="onCancel($event)"
+  (close)="onNativeClose()"
+  (click)="onDialogClick($event)"
+  (keydown)="onKeydown($event)"
+>
+  @if (category(); as cat) {
+    <div class="panel">
+      <header class="panel-header">
+        <div>
+          <h2 id="gallery-title">{{ cat.title }}</h2>
+          <p class="count">
+            {{ cat.images.length }} {{ cat.images.length === 1 ? 'photo' : 'photos' }}
+          </p>
+        </div>
+        <button
+          class="icon-button close"
+          type="button"
+          aria-label="Close gallery"
+          (click)="close()"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </header>
+
+      @if (viewerImage(); as image) {
+        <div class="viewer">
+          <div class="viewer-bar">
+            <button class="viewer-back" type="button" (click)="backToGrid()">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M15 5l-7 7 7 7" />
+              </svg>
+              All photos
+            </button>
+            <p class="counter" aria-live="polite">
+              {{ viewerIndex()! + 1 }} / {{ cat.images.length }}
+            </p>
+          </div>
+
+          <div
+            class="stage"
+            (pointerdown)="onPointerDown($event)"
+            (pointerup)="onPointerUp($event)"
+          >
+            @if (!fullLoaded()) {
+              <p class="loading" role="status">Loading photo…</p>
+            }
+            <img
+              [class.is-loaded]="fullLoaded()"
+              [src]="image.full"
+              [alt]="image.alt"
+              [width]="image.width"
+              [height]="image.height"
+              decoding="async"
+              draggable="false"
+              (load)="onFullLoad()"
+            />
+            @if (cat.images.length > 1) {
+              <button
+                class="icon-button nav nav-prev"
+                type="button"
+                aria-label="Previous photo"
+                (click)="prev()"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M15 5l-7 7 7 7" />
+                </svg>
+              </button>
+              <button
+                class="icon-button nav nav-next"
+                type="button"
+                aria-label="Next photo"
+                (click)="next()"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            }
+          </div>
+        </div>
+      } @else {
+        <div class="grid-scroll">
+          <ul class="grid">
+            @for (image of cat.images; track image.full; let i = $index) {
+              <li>
+                <button class="thumb" type="button" [attr.data-index]="i" (click)="showImage(i)">
+                  <img
+                    [src]="image.thumb"
+                    [alt]="image.alt"
+                    [width]="image.width"
+                    [height]="image.height"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  }
+</dialog>

@@ -1,0 +1,19 @@
+<section id="services" class="section services focus-on-dark" aria-labelledby="services-heading">
+  <div class="container">
+    <h2 id="services-heading">{{ intro.heading }}</h2>
+    <p class="summary">{{ intro.summary }}</p>
+
+    <app-carousel
+      label="Service categories"
+      [items]="categories"
+      [itemTitle]="titleOf"
+      [paused]="modal().isOpen()"
+    >
+      <ng-template let-category>
+        <app-service-card [category]="category" (opened)="openGallery(category, $event)" />
+      </ng-template>
+    </app-carousel>
+  </div>
+</section>
+
+<app-gallery-modal />
