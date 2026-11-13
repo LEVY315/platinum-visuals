@@ -1,0 +1,11 @@
+// Mobile-first breakpoints (CLAUDE.md §3). Keep in sync with
+// src/app/services/breakpoints.ts, which mirrors them for matchMedia.
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+
+@mixin up($min) {
+  @media (min-width: $min) {
+    @content;
+  }
+}

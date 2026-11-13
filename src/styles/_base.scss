@@ -1,0 +1,116 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: var(--header-height);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html.scroll-locked {
+  overflow: hidden;
+  padding-right: var(--scrollbar-compensation, 0);
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-charcoal);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-blue);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-4xl);
+}
+
+h2 {
+  font-size: var(--text-3xl);
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  max-width: 70ch;
+}
+
+a {
+  color: var(--color-blue);
+  text-underline-offset: 0.2em;
+
+  &:hover {
+    color: var(--color-blue-dark);
+  }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+section[id] {
+  scroll-margin-top: var(--header-height);
+}
+
+// Reusable visible focus style. Applied to every focusable element by default;
+// `.focus-on-dark` swaps the ring color for the charcoal band.
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.focus-on-dark :focus-visible {
+  outline-color: var(--color-focus-on-dark);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-property: opacity !important;
+  }
+}
