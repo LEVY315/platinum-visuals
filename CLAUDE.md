@@ -177,3 +177,12 @@ Anything you decided that the task or CLAUDE.md didn't specify, and anything you
 
 ### What the developer needs to do or check manually
 ```
+
+## 11. Deployment
+
+- Firebase project ID: `platinum-visuals`. Hosting only, configured in `firebase.json` and `.firebaserc`. The hosting `public` folder is `dist/platinum-visuals/browser`.
+- `.github/workflows/deploy-live.yml`: on push to `main` (or a manual run), it tests, builds and deploys to the **live** channel.
+- `.github/workflows/preview-pr.yml`: on pull requests into `main`, it tests, builds and deploys to a 7-day **preview channel**, then comments the URL on the PR. Fork PRs skip the deploy.
+- Credentials: the GitHub secret `FIREBASE_SERVICE_ACCOUNT` (service account JSON). Never create, print or commit credentials.
+- Rule: **only pushes to `main` reach the live site.** Do not deploy from other branches and do not run `firebase deploy` unless a task explicitly asks for it.
+- Node version for CI and local work comes from `.nvmrc`. Keep `engines.node` in `package.json` matching it.
