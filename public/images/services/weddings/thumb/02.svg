@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" role="img" aria-label="Weddings · 02">
+  <rect width="400" height="600" fill="hsl(204 16% 87%)"/>
+  <g fill="none" stroke="hsl(204 14% 38%)" stroke-width="4.8" stroke-linejoin="round">
+    <rect x="156" y="250.56" width="88" height="63.36" rx="7.04"/>
+    <path d="M182.4 250.56l7.04 -10.559999999999999h21.119999999999997l7.04 10.559999999999999"/>
+    <circle cx="200" cy="284" r="17.6"/>
+  </g>
+  <text x="200" y="349.92" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="18" fill="hsl(204 14% 38%)">Weddings · 02</text>
+</svg>

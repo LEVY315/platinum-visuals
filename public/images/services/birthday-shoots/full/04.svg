@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-label="Birthday Shoots · 04">
+  <rect width="1800" height="1200" fill="hsl(221 16% 84%)"/>
+  <g fill="none" stroke="hsl(221 14% 38%)" stroke-width="14.4" stroke-linejoin="round">
+    <rect x="768" y="451.68" width="264" height="190.07999999999998" rx="21.12"/>
+    <path d="M847.2 451.68l21.12 -31.68h63.36l21.12 31.68"/>
+    <circle cx="900" cy="552" r="52.800000000000004"/>
+  </g>
+  <text x="900" y="749.76" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="54" fill="hsl(221 14% 38%)">Birthday Shoots · 04</text>
+</svg>

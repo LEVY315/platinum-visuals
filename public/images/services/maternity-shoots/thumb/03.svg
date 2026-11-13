@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500" role="img" aria-label="Maternity Shoots · 03">
+  <rect width="500" height="500" fill="hsl(243 16% 90%)"/>
+  <g fill="none" stroke="hsl(243 14% 38%)" stroke-width="6" stroke-linejoin="round">
+    <rect x="195" y="188.2" width="110" height="79.2" rx="8.8"/>
+    <path d="M228 188.2l8.8 -13.2h26.4l8.8 13.2"/>
+    <circle cx="250" cy="230" r="22"/>
+  </g>
+  <text x="250" y="312.4" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="22.5" fill="hsl(243 14% 38%)">Maternity Shoots · 03</text>
+</svg>
