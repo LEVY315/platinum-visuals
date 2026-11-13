@@ -1,0 +1,52 @@
+# Builds every pull request into main and deploys it to a temporary Firebase Hosting preview channel.
+# Steps: install → test → production build → deploy preview (expires after 7 days) → the action
+# comments the preview URL on the PR. A failing test or build stops the job before the deploy step.
+# PRs from forks still run tests and the build, but skip the deploy because secrets are not available.
+name: Preview pull request
+
+on:
+  pull_request:
+    branches: [main]
+
+# New commits on the same PR replace an older, still-running preview build.
+concurrency:
+  group: preview-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  test-build-preview:
+    name: Test, build and deploy preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Set up Node (version from .nvmrc)
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test:ci
+
+      - name: Build for production
+        run: npm run build:prod
+
+      - name: Deploy to Firebase Hosting preview channel
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: platinum-visuals
+          expires: 7d

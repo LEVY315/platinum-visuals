@@ -1,0 +1,50 @@
+# Deploys the site to the live Firebase Hosting channel.
+# Runs on every push to main (and manually via "Run workflow"): install → test → production build → deploy.
+# A failing test or build stops the job before the deploy step.
+name: Deploy to live
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# One live deploy at a time. A newer run replaces a queued (pending) older one,
+# but a deploy that is already running is never cancelled.
+concurrency:
+  group: deploy-live
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  test-build-deploy:
+    name: Test, build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Set up Node (version from .nvmrc)
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test:ci
+
+      - name: Build for production
+        run: npm run build:prod
+
+      - name: Deploy to Firebase Hosting (live)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: platinum-visuals
+          channelId: live
